@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3000;
 
 // TODO > importar rutas aqui
 const personas = require('./routes/personas.routes');
@@ -29,7 +28,11 @@ app.use((err, req, res, next) =>{
     });
 });
 
-
-//* Puerto de escucha
+// Puerto por default de escucha ideal cuando se trabaja de forma local
 app.listen(port)
 console.log(`-- Server listening on port ${port} --`);
+
+//* Heroku: asigna dinamicamente uno de los puertos disponibles en el server
+// const server = app.listen(0, () => {
+//     console.log(`Listeing on port: ${server.address().port}`);
+// })
