@@ -1,0 +1,383 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "colegio-cebe-backend",
+    "dateExported": "2022-10-20T04:25:33.566Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "personas",
+            "containerId": "",
+            "created": "2022-10-17T06:39:49.019Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "roles",
+            "containerId": "",
+            "created": "2022-10-18T21:59:07.112Z",
+            "sortNum": 15000
+        },
+        {
+            "_id": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "tiposDeContacto",
+            "containerId": "",
+            "created": "2022-10-18T22:13:07.255Z",
+            "sortNum": 17500
+        },
+        {
+            "_id": "9eca133c-9bf7-465a-9c49-449fd1a4f4fb",
+            "name": "contactos",
+            "containerId": "",
+            "created": "2022-10-18T11:32:39.600Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "4477e1c8-1c1d-4790-bca0-991db53b610f",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "create",
+            "url": "http://localhost:3000/personas",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-10-17T06:39:58.167Z",
+            "modified": "2022-10-18T21:54:36.007Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cui\": \"3623456789123\",\n  \"correo\": \"3-email@example.com\",\n  \"nombres\": \"nombre nombre\",\n  \"apellidos\": \"apellido apellido\",\n  \"genero\": \"M\",\n  \"fechaNacimiento\": \"2002-12-29\",\n  \"edad\": 19,\n  \"direccion\": \"zona calle avenida municipio depto\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9ca4f3cb-a5b8-4d24-85fe-89c7a6935633",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "getAll",
+            "url": "http://localhost:3000/personas",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-10-17T06:43:04.711Z",
+            "modified": "2022-10-17T06:43:18.999Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4aa32483-7dba-4baa-83f5-4b13c4eb76c4",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "getActivas",
+            "url": "http://localhost:3000/personas/activas",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2022-10-18T10:31:12.947Z",
+            "modified": "2022-10-18T10:31:49.536Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5468adae-b2ae-4dcb-b868-91df08b9ea5f",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "getInactivas",
+            "url": "http://localhost:3000/personas/inactivas",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2022-10-18T10:32:07.588Z",
+            "modified": "2022-10-18T10:32:26.279Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7539d461-5e88-459c-873f-4ab7da0e274a",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "getPorCui",
+            "url": "http://localhost:3000/personas/1623456789123",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2022-10-18T10:32:47.462Z",
+            "modified": "2022-10-18T10:34:02.237Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e1facf87-d65d-4ffb-a8e3-32eb9bd40472",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "updatePorCui",
+            "url": "http://localhost:3000/personas/1623456789123",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2022-10-18T10:33:10.329Z",
+            "modified": "2022-10-18T21:57:49.988Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"newCui\": \"1623456789123\",\n  \"correo\": \"1-email@example.com\",\n  \"nombres\": \"nombre nombre\",\n  \"apellidos\": \"apellido apellido\",\n  \"genero\": \"M\",\n  \"fechaNacimiento\": \"2002-12-29\",\n  \"edad\": 19,\n  \"direccion\": \"zona calle avenida municipio depto\",\n  \"estaActivo\": true\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "50a11e8e-2fc3-49aa-a46d-8d9a08652d32",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1c47652d-3c14-474a-b2b3-885213ff9ba9",
+            "name": "deletePorCui",
+            "url": "http://localhost:3000/personas/2623456789123",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2022-10-18T10:33:16.537Z",
+            "modified": "2022-10-18T12:25:24.523Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2bd6bb99-4707-43a3-97b8-569410a7ed68",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "9eca133c-9bf7-465a-9c49-449fd1a4f4fb",
+            "name": "create",
+            "url": "http://localhost:3000/contactos",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2022-10-18T11:32:44.815Z",
+            "modified": "2022-10-18T22:23:22.987Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idTipoc\": 4,\n  \"idPersona\": 3,\n  \"contacto\": \"92345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "26d934e8-f1ed-4c80-9418-00386795b001",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "9eca133c-9bf7-465a-9c49-449fd1a4f4fb",
+            "name": "readPorPersona",
+            "url": "http://localhost:3000/contactos/3",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2022-10-18T11:47:01.968Z",
+            "modified": "2022-10-18T22:24:00.926Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6f3f1eee-5c54-45ea-b72f-a14f53d02b2e",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "9eca133c-9bf7-465a-9c49-449fd1a4f4fb",
+            "name": "updateOne",
+            "url": "http://localhost:3000/contactos/6",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2022-10-18T11:57:46.217Z",
+            "modified": "2022-10-18T22:26:59.660Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"idTipoc\": 5,\n  \"contacto\": \"updated contact\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ca0a8eb3-6b41-4736-8fe8-516ecea05f38",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "9eca133c-9bf7-465a-9c49-449fd1a4f4fb",
+            "name": "deleteOne",
+            "url": "http://localhost:3000/contactos/6",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2022-10-18T11:57:54.056Z",
+            "modified": "2022-10-18T22:27:37.482Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0b0ae15d-abc6-4927-9427-82fcd9e5311c",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "create",
+            "url": "http://localhost:3000/roles",
+            "method": "POST",
+            "sortNum": 130000,
+            "created": "2022-10-18T21:59:13.174Z",
+            "modified": "2022-10-18T22:09:50.199Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"delete\",\n  \"descripcion\": \"delete this\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d63be7d1-c144-4519-9e90-6fc19153a014",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "readAll",
+            "url": "http://localhost:3000/roles",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2022-10-18T22:05:00.638Z",
+            "modified": "2022-10-18T22:05:07.309Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e57b67b2-fcbf-480d-86b1-5a44767fa18f",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "readOne",
+            "url": "http://localhost:3000/roles/1",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2022-10-18T22:05:21.294Z",
+            "modified": "2022-10-18T22:08:28.626Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b26cbb03-1cc5-43f3-87a8-19bda606443b",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "updateOne",
+            "url": "http://localhost:3000/roles/1",
+            "method": "PUT",
+            "sortNum": 160000,
+            "created": "2022-10-18T22:08:56.180Z",
+            "modified": "2022-10-18T22:09:25.550Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"Maestro\",\n  \"descripcion\": \"Se dedica profesionalmente a la enseñanza, ya sea con carácter general o especializado en una determinada área de conocimiento.\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "00513392-cf6d-4ea2-ab30-3024d13714be",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "1a419bb6-9979-4320-81ec-621146c77c82",
+            "name": "deleteOne",
+            "url": "http://localhost:3000/roles/3",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2022-10-18T22:10:24.616Z",
+            "modified": "2022-10-18T22:10:36.321Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "638bf536-8427-427b-a450-1e7f27b7fb99",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "create",
+            "url": "http://localhost:3000/tipos-de-contacto/",
+            "method": "POST",
+            "sortNum": 180000,
+            "created": "2022-10-18T22:13:32.783Z",
+            "modified": "2022-10-18T22:19:23.249Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"delete\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "33e4d6c5-6bad-4969-8642-f3c1af83c0ea",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "readAll",
+            "url": "http://localhost:3000/tipos-de-contacto/",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2022-10-18T22:14:48.735Z",
+            "modified": "2022-10-18T22:15:01.038Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c5098caf-8b2f-40ef-847c-08809da1325a",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "readOne",
+            "url": "http://localhost:3000/tipos-de-contacto/1",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2022-10-18T22:14:52.872Z",
+            "modified": "2022-10-18T22:15:06.324Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "af8e3b74-02bc-4e9a-a7b6-87b87a152b17",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "updateOne",
+            "url": "http://localhost:3000/tipos-de-contacto/1",
+            "method": "PUT",
+            "sortNum": 210000,
+            "created": "2022-10-18T22:15:50.099Z",
+            "modified": "2022-10-18T22:16:12.930Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"gmail update\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "fffece65-6a98-4737-b1a8-0c19a532db9e",
+            "colId": "5b5ea606-df28-4f1b-b4ad-89e5a6bd59ed",
+            "containerId": "56e81cec-8bb8-4610-9ccd-d777388a5371",
+            "name": "delete",
+            "url": "http://localhost:3000/tipos-de-contacto/6",
+            "method": "DELETE",
+            "sortNum": 220000,
+            "created": "2022-10-18T22:19:18.461Z",
+            "modified": "2022-10-18T22:19:45.484Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
