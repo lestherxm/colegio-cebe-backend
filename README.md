@@ -18,12 +18,11 @@ psql -U root -d cebe -h localhost
 ```
 
 ###### You can verify the EndPoints using Thunder Client extension on VSCODE importing the collections file which is in this project as `thunder-collection_colegio-cebe-backend.json`
-![Importing collections step one](https://github.com/lestherxm/colegio-cebe-backend/blob/main/docs/import-collections-1.png?raw=true)
-![Importing collections step two](https://github.com/lestherxm/colegio-cebe-backend/blob/main/docs/import-collections-2.png?raw=true)
 
 <p align="center">
     <img src="https://github.com/lestherxm/colegio-cebe-backend/blob/main/docs/import-collections-1.png"> 
 </p>
+
 <p align="center">
     <img src="https://github.com/lestherxm/colegio-cebe-backend/blob/main/docs/import-collections-2.png"> 
 </p>
