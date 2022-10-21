@@ -1,10 +1,11 @@
+-- ** DDL **
 CREATE TABLE IF NOT EXISTS personas(
     id_persona SERIAL PRIMARY KEY,
     cui CHAR(13) UNIQUE NOT NULL,
     correo VARCHAR(250) UNIQUE NOT NULL,
     nombres VARCHAR(250) NOT NULL,
     apellidos VARCHAR(250) NOT NULL,
-    nombre_completo VARCHAR(250) NOT NULL,
+    nombre_completo VARCHAR(250) NOT NULL, -- util para reportes
     genero CHAR(1) NOT NULL, 
     fecha_nacimiento DATE NOT NULL,
     edad SMALLINT NOT NULL,
@@ -37,37 +38,50 @@ CREATE TABLE IF NOT EXISTS contactos(
     ON DELETE CASCADE --Si se elimina los datos de la persona, tambien se elimina los contactos asociados a esa persona
 ); 
 
--- grado que se va a asignar.
--- representante
+CREATE TABLE IF NOT EXISTS grados(
+    id_grado SERIAL PRIMARY KEY,
+    grado VARCHAR(20) UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS grupos(
+    id_grupo SERIAL PRIMARY KEY,
+    grupo VARCHAR(250) UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS jornadas(
+    id_jornada SERIAL PRIMARY KEY,
+    jornada VARCHAR(20) UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS secciones(,
+    id_seccion SERIAL PRIMARY KEY,
+    seccion VARCHAR(1) UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS anios(
+    id_anio SERIAL PRIMARY KEY,
+    anio CHAR(4) UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS aulas(
+    id_aula SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
+    cupos SMALLINT NOT NULL DEFAULT 0,
+    inscritos SMALLINT NOT NULL DEFAULT 0,
+    CONSTRAINT chk_capacidad CHECK (inscritos <= cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
+);
+
 -- CREATE TABLE alumnos(
 --     idAlumno SERIAL PRIMARY KEY,
 --     carnet VARCHAR(250) NOT NULL UNIQUE,
---     idPersona INT NOT NULL UNIQUE, 
---     CONSTRAINT fk_persona
---     FOREIGN KEY(idPersona) 
--- 	REFERENCES personas(idPersona)
---     ON DELETE CASCADE
+--     idRep INT NOT NULL, -- Representante: responde por el alumno por cuestiones administrativas (notas mainly)
+--     idAula INT NOT NULL
 -- );
 
--- CREATE TABLE anios(
---     idAnio SERIAL PRIMARY KEY,
---     anio CHAR(4) UNIQUE NOT NULL
--- );
 
--- CREATE TABLE grados(
---     idGrado SERIAL PRIMARY KEY,
---     nombre VARCHAR(250) UNIQUE NOT NULL
--- );
 
--- CREATE TABLE grupos(
---     idGrupo SERIAL PRIMARY KEY,
---     nombre VARCHAR(250) UNIQUE NOT NULL
--- );
 
--- CREATE TABLE jornadas(
---     idJornada SERIAL PRIMARY KEY,
---     nombre VARCHAR(250) UNIQUE NOT NULL
--- );
+
 
 
 
