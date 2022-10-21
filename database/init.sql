@@ -1,5 +1,5 @@
 -- ** DDL **
-CREATE TABLE IF NOT EXISTS personas(
+CREATE TABLE personas(
     id_persona SERIAL PRIMARY KEY,
     cui CHAR(13) UNIQUE NOT NULL,
     correo VARCHAR(250) UNIQUE NOT NULL,
@@ -13,18 +13,18 @@ CREATE TABLE IF NOT EXISTS personas(
     esta_activo BOOLEAN DEFAULT FALSE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS roles(
+CREATE TABLE roles(
     id_rol SERIAL PRIMARY KEY,
     nombre VARCHAR(250) UNIQUE NOT NULL,
     descripcion TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS tipos_de_contacto(
+CREATE TABLE tipos_de_contacto(
     id_tipoc SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS contactos(
+CREATE TABLE contactos(
     id_contacto SERIAL PRIMARY KEY,
     id_tipoc INT NOT NULL,  -- que tipo de contacto es: email, phone, social media link
     id_persona INT NOT NULL, -- para saber a que persona pertenece ese contacto
@@ -39,40 +39,40 @@ CREATE TABLE IF NOT EXISTS contactos(
 ); 
 
 --* inicio: tablas para llenar combobox - creacion de aulas
-CREATE TABLE IF NOT EXISTS grados(
+CREATE TABLE grados(
     id_grado SERIAL PRIMARY KEY,
     grado VARCHAR(20) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS grupos(
+CREATE TABLE grupos(
     id_grupo SERIAL PRIMARY KEY,
     grupo VARCHAR(250) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS jornadas(
+CREATE TABLE jornadas(
     id_jornada SERIAL PRIMARY KEY,
     jornada VARCHAR(20) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS secciones(
+CREATE TABLE secciones(
     id_seccion SERIAL PRIMARY KEY,
     seccion VARCHAR(1) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS anios(
+CREATE TABLE anios(
     id_anio SERIAL PRIMARY KEY,
     anio CHAR(4) UNIQUE NOT NULL
 );
 --* fin: tablas para llenar combobox - creacion de aulas
 
-CREATE TABLE IF NOT EXISTS aulas(
+CREATE TABLE aulas(
     id_aula SERIAL PRIMARY KEY,
     id_grado INT NOT NULL,
     id_grupo INT NOT NULL,
     id_jornada INT NOT NULL,
     id_seccion INT NOT NULL,
     id_anio INT NOT NULL,
-    nombre VARCHAR(255) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
+    nombre VARCHAR(250) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
     n_cupos SMALLINT NOT NULL DEFAULT 0,
     n_inscritos SMALLINT NOT NULL DEFAULT 0,
     CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos), -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
@@ -83,12 +83,44 @@ CREATE TABLE IF NOT EXISTS aulas(
     CONSTRAINT fk_anio FOREIGN KEY(id_anio) REFERENCES anios(id_anio)
 );
 
--- CREATE TABLE alumnos(
---     idAlumno SERIAL PRIMARY KEY,
---     carnet VARCHAR(250) NOT NULL UNIQUE,
---     idRep INT NOT NULL, -- Representante: responde por el alumno por cuestiones administrativas (notas mainly)
---     idAula INT NOT NULL
--- );
+CREATE TABLE cursos(
+    id_curso SERIAL PRIMARY KEY,
+    nombre VARCHAR(250) UNIQUE NOT NULL,
+    descripcion TEXT UNIQUE NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--* DATOS DE PRRUEBA
+
+INSERT INTO cursos(nombre, descripcion) VALUES
+('Matemática I', 'Descripción Matemática I'),
+('Física I', 'Descripción Física I'),
+('Química I', 'Descripción Química I'),
+('Matemática II', 'Descripción Matemática II'),
+('Física II', 'Descripción Física II'),
+('Química II', 'Descripción Química II'),
+('Matemática III', 'Descripción Matemática III'),
+('Física III', 'Descripción Física III'),
+('Química III', 'Descripción Química III');
+
 
 
 

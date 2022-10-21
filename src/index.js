@@ -15,6 +15,7 @@ const jornadas = require('./routes/jornadas.routes');
 const secciones = require('./routes/secciones.routes');
 const anios = require('./routes/anios.routes');
 const aulas = require('./routes/aulas.routes');
+const cursos = require('./routes/cursos.routes');
 
 //* Complementan funcionalidad de express
 app.use(cors()); // comunicar ambos servers de manera simple (front y back)
@@ -32,6 +33,7 @@ app.use(jornadas);
 app.use(secciones);
 app.use(anios);
 app.use(aulas);
+app.use(cursos);
 
 //* Esta es la funcion Next() usada para manejar errores en los controladores
 app.use((err, req, res, next) =>{

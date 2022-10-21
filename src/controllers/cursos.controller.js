@@ -7,12 +7,12 @@ const {
     updateWhere,
     deleteWhere,
     msgNotFound
-} = require("../sql/anios.sql"); //change this for each controller
+} = require("../sql/cursos.sql"); //change this for each controller
 
 const create = async (req, res, next) => {
     try {
-        const { anio } = req.body;
-        const result = await db.query(insertInto, [anio]);
+        const { nombre, descripcion } = req.body;
+        const result = await db.query(insertInto, [nombre, descripcion]);
         res.json(result.rows[0]);
     } catch (error) {
         next(error);
@@ -21,8 +21,8 @@ const create = async (req, res, next) => {
 
 const readAll = async (req, res, next) => {
     try {
-        const allAnios = await db.query(selectAll);
-        res.json(allAnios.rows);
+        const allCursos = await db.query(selectAll);
+        res.json(allCursos.rows);
     } catch (error) {
         next(error);
     }
@@ -30,11 +30,11 @@ const readAll = async (req, res, next) => {
 
 const readOne = async (req, res, next) => {
     try {
-        const { idAnio } = req.params;
-        const result = await db.query(selectWhere, [idAnio]);
+        const { idCurso } = req.params;
+        const result = await db.query(selectWhere, [idCurso]);
         if (result.rows.length === 0) {
             return res.status(404).json({
-                message: msgNotFound('obtener', 'id_anio', idAnio)
+                message: msgNotFound('obtener', 'id_curso', idCurso)
             });
         }//else
         res.json(result.rows[0]);
@@ -45,12 +45,12 @@ const readOne = async (req, res, next) => {
 
 const updateOne = async (req, res, next) => {
     try {
-        const { idAnio } = req.params;
-        const { anio } = req.body;
-        const result = await db.query(updateWhere, [ anio, idAnio ]);
+        const { idCurso } = req.params;
+        const { nombre, descripcion } = req.body;
+        const result = await db.query(updateWhere, [ nombre, descripcion, idCurso ]);
         if (result.rows.length === 0) {
             return res.status(404).json({
-                message: msgNotFound('actualizar', 'id_anio', idAnio),
+                message: msgNotFound('actualizar', 'id_curso', idCurso)
             });
         } //else
         return res.json(result.rows[0]);
@@ -61,11 +61,11 @@ const updateOne = async (req, res, next) => {
 
 const deleteOne = async (req, res, next) => {
     try {
-        const { idAnio } = req.params;
-        const result = await db.query(deleteWhere, [idAnio]);
+        const { idCurso } = req.params;
+        const result = await db.query(deleteWhere, [idCurso]);
         if (result.rowCount === 0) {
             return res.status(404).json({
-                message: msgNotFound('eliminar', 'id_anio', idAnio),
+                message: msgNotFound('eliminar', 'id_curso', idCurso)
             });
         }//else
         return res.sendStatus(204);
