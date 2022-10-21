@@ -11,6 +11,7 @@ const roles = require('./routes/roles.routes');
 const tiposDeContacto = require('./routes/tiposDeContacto.routes');
 const grados = require('./routes/grados.routes');
 const grupos = require('./routes/grupos.routes');
+const jornadas = require('./routes/jornadas.routes');
 
 //* Complementan funcionalidad de express
 app.use(cors()); // comunicar ambos servers de manera simple (front y back)
@@ -24,6 +25,7 @@ app.use(roles);
 app.use(tiposDeContacto);
 app.use(grados);
 app.use(grupos);
+app.use(jornadas);
 
 //* Esta es la funcion Next() usada para manejar errores en los controladores
 app.use((err, req, res, next) =>{
