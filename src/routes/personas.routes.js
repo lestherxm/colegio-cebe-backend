@@ -2,6 +2,7 @@
 const persona = require("../controllers/personas.controller");
 //Objeto para definir rutas
 const router = require("express").Router();
+// End point
 const ep = '/personas';
 //
 router.post(`${ep}`, persona.create);

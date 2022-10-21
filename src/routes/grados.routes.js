@@ -2,7 +2,7 @@
 const grados = require("../controllers/grados.controller");
 //
 const router = require("express").Router();
-// End Points
+// End Point
 const ep = '/grados';
 //C
 router.post(`${ep}`, grados.create);

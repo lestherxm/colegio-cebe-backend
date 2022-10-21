@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
+const port = process.env.PORT || 3000;
 
 // TODO > importar rutas aqui
 const personas = require('./routes/personas.routes');
@@ -9,6 +10,7 @@ const contactos = require('./routes/contactos.routes');
 const roles = require('./routes/roles.routes');
 const tiposDeContacto = require('./routes/tiposDeContacto.routes');
 const grados = require('./routes/grados.routes');
+const grupos = require('./routes/grupos.routes');
 
 //* Complementan funcionalidad de express
 app.use(cors()); // comunicar ambos servers de manera simple (front y back)
@@ -20,6 +22,8 @@ app.use(personas);
 app.use(contactos);
 app.use(roles);
 app.use(tiposDeContacto);
+app.use(grados);
+app.use(grupos);
 
 //* Esta es la funcion Next() usada para manejar errores en los controladores
 app.use((err, req, res, next) =>{
