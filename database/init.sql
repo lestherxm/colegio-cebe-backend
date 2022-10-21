@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS contactos(
     ON DELETE CASCADE --Si se elimina los datos de la persona, tambien se elimina los contactos asociados a esa persona
 ); 
 
+--* inicio: tablas para llenar combobox - creacion de aulas
 CREATE TABLE IF NOT EXISTS grados(
     id_grado SERIAL PRIMARY KEY,
     grado VARCHAR(20) UNIQUE NOT NULL
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS anios(
     id_anio SERIAL PRIMARY KEY,
     anio CHAR(4) UNIQUE NOT NULL
 );
+--* fin: tablas para llenar combobox - creacion de aulas
 
 CREATE TABLE IF NOT EXISTS aulas(
     id_aula SERIAL PRIMARY KEY,

@@ -2,11 +2,11 @@
 *? SENTENCIAS SQL
 */
 // 
-const table = 'secciones';
-const pk = 'id_seccion';
+const table = 'anios';
+const pk = 'id_anio';
 // 
 const insertInto = 
-`INSERT INTO ${table} (seccion) VALUES ($1) RETURNING *`; 
+`INSERT INTO ${table} (anio) VALUES ($1) RETURNING *`; 
 // 
 const selectAll = 
 `SELECT * FROM ${table}`;
@@ -15,7 +15,7 @@ const selectWhere =
 `SELECT * FROM ${table} where ${pk} = $1`
 // 
 const updateWhere = 
-`UPDATE ${table} SET seccion = $1 WHERE ${pk} = $2 RETURNING *`;
+`UPDATE ${table} SET anio = $1 WHERE ${pk} = $2 RETURNING *`;
 // 
 const deleteWhere = 
 `DELETE FROM ${table} WHERE ${pk} = $1 RETURNING *`;
