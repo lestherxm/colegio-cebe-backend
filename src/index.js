@@ -8,6 +8,7 @@ const personas = require('./routes/personas.routes');
 const contactos = require('./routes/contactos.routes');
 const roles = require('./routes/roles.routes');
 const tiposDeContacto = require('./routes/tiposDeContacto.routes');
+const grados = require('./routes/grados.routes');
 
 //* Complementan funcionalidad de express
 app.use(cors()); // comunicar ambos servers de manera simple (front y back)
