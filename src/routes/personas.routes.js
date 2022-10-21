@@ -2,20 +2,21 @@
 const persona = require("../controllers/personas.controller");
 //Objeto para definir rutas
 const router = require("express").Router();
+const ep = '/personas';
 //
-router.post("/personas", persona.create);
+router.post(`${ep}`, persona.create);
 //
-router.get("/personas", persona.readAll);
+router.get(`${ep}`, persona.readAll);
 //
-router.get("/personas/activas", persona.readActive);
+router.get(`${ep}/activas`, persona.readActive);
 //
-router.get("/personas/inactivas", persona.readNoActive);
+router.get(`${ep}/inactivas`, persona.readNoActive);
 //
-router.get("/personas/:cui", persona.readOne);
+router.get(`${ep}/:cui`, persona.readOne);
 //Actualizar !!!
-router.put("/personas/:cui", persona.updateOne);
+router.put(`${ep}/:cui`, persona.updateOne);
 //Eliminar !!!
-router.delete("/personas/:cui", persona.deleteOne);
+router.delete(`${ep}/:cui`, persona.deleteOne);
 //Define el endpoint y sus rutas
 
 module.exports = router;

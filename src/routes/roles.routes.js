@@ -2,16 +2,18 @@
 const rol = require("../controllers/roles.controller");
 //
 const router = require("express").Router();
+// End point
+const ep = '/roles';
 //
-router.post("/roles", rol.create);
+router.post(`${ep}`, rol.create);
 //
-router.get("/roles", rol.readAll);
+router.get(`${ep}`, rol.readAll);
 //
-router.get("/roles/:idRol", rol.readOne);
+router.get(`${ep}/:idRol`, rol.readOne);
 //
-router.put("/roles/:idRol", rol.updateOne);
+router.put(`${ep}/:idRol`, rol.updateOne);
 //
-router.delete("/roles/:idRol", rol.deleteOne);
+router.delete(`${ep}/:idRol`, rol.deleteOne);
 
 module.exports = router;
 

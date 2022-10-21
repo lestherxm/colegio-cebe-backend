@@ -2,15 +2,17 @@
 const tiposDeContato = require("../controllers/tiposDeContacto.controller");
 //
 const router = require("express").Router();
+// End Point
+const ep = '/tipos-de-contacto'
 //
-router.post("/tipos-de-contacto", tiposDeContato.create);
+router.post(`${ep}`, tiposDeContato.create);
 //
-router.get("/tipos-de-contacto", tiposDeContato.readAll);
+router.get(`${ep}`, tiposDeContato.readAll);
 //
-router.get("/tipos-de-contacto/:idTipoc", tiposDeContato.readOne);
+router.get(`${ep}/:idTipoc`, tiposDeContato.readOne);
 //
-router.put("/tipos-de-contacto/:idTipoc", tiposDeContato.updateOne);
+router.put(`${ep}/:idTipoc`, tiposDeContato.updateOne);
 //
-router.delete("/tipos-de-contacto/:idTipoc", tiposDeContato.deleteOne);
+router.delete(`${ep}/:idTipoc`, tiposDeContato.deleteOne);
 
 module.exports = router;

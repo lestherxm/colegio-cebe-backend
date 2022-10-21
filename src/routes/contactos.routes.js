@@ -2,14 +2,16 @@
 const contacto = require("../controllers/contactos.controller");
 //
 const router = require("express").Router();
+// End Point
+const ep = '/contactos';
 //
-router.post("/contactos", contacto.create);
+router.post(`${ep}`, contacto.create);
 //
-router.get("/contactos/:idPersona", contacto.readPorPersona);
+router.get(`${ep}/:idPersona`, contacto.readPorPersona);
 //
-router.put("/contactos/:idContacto", contacto.updateOne);
+router.put(`${ep}/:idContacto`, contacto.updateOne);
 //
-router.delete("/contactos/:idContacto", contacto.deleteOne);
+router.delete(`${ep}/:idContacto`, contacto.deleteOne);
 //
 module.exports = router;  
 
