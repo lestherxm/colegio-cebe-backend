@@ -14,6 +14,7 @@ const grupos = require('./routes/grupos.routes');
 const jornadas = require('./routes/jornadas.routes');
 const secciones = require('./routes/secciones.routes');
 const anios = require('./routes/anios.routes');
+const aulas = require('./routes/aulas.routes');
 
 //* Complementan funcionalidad de express
 app.use(cors()); // comunicar ambos servers de manera simple (front y back)
@@ -30,6 +31,7 @@ app.use(grupos);
 app.use(jornadas);
 app.use(secciones);
 app.use(anios);
+app.use(aulas);
 
 //* Esta es la funcion Next() usada para manejar errores en los controladores
 app.use((err, req, res, next) =>{
@@ -43,7 +45,7 @@ app.use((err, req, res, next) =>{
 app.listen(port)
 console.log(`-- Server listening on port ${port} --`);
 
-//* Heroku: asigna dinamicamente uno de los puertos disponibles en el server
+//* Asigna dinamicamente uno de los puertos disponibles en el server
 // const server = app.listen(0, () => {
 //     console.log(`Listeing on port: ${server.address().port}`);
 // })

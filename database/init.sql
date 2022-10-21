@@ -67,10 +67,20 @@ CREATE TABLE IF NOT EXISTS anios(
 
 CREATE TABLE IF NOT EXISTS aulas(
     id_aula SERIAL PRIMARY KEY,
+    id_grado INT NOT NULL,
+    id_grupo INT NOT NULL,
+    id_jornada INT NOT NULL,
+    id_seccion INT NOT NULL,
+    id_anio INT NOT NULL,
     nombre VARCHAR(255) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
-    cupos SMALLINT NOT NULL DEFAULT 0,
-    inscritos SMALLINT NOT NULL DEFAULT 0,
-    CONSTRAINT chk_capacidad CHECK (inscritos <= cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
+    n_cupos SMALLINT NOT NULL DEFAULT 0,
+    n_inscritos SMALLINT NOT NULL DEFAULT 0,
+    CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos), -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
+    CONSTRAINT fk_grado FOREIGN KEY(id_grado) REFERENCES grados(id_grado),
+    CONSTRAINT fk_grupo FOREIGN KEY(id_grupo) REFERENCES grupos(id_grupo),
+    CONSTRAINT fk_jornada FOREIGN KEY(id_jornada) REFERENCES jornadas(id_jornada),
+    CONSTRAINT fk_seccion FOREIGN KEY(id_seccion) REFERENCES secciones(id_seccion),
+    CONSTRAINT fk_anio FOREIGN KEY(id_anio) REFERENCES anios(id_anio)
 );
 
 -- CREATE TABLE alumnos(
