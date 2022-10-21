@@ -12,8 +12,9 @@ const {
 
 const create = async (req, res, next) => {
     try {
-        const { cui, correo, nombres, apellidos, genero, fechaNacimiento, edad, direccion } = req.body;
+        const { cui, correo, nombres, apellidos, genero, fechaNacimiento, direccion } = req.body;
         const nombreCompleto = `${nombres} ${apellidos}`;
+        const edad = `(age(current_date, ${fechaNacimiento}))`; //check this
         const result = await db.query(insertInto, [
             cui,
             correo,
