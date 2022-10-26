@@ -6,8 +6,8 @@ const table = 'aulas';
 const pk = 'id_aula';
 // 
 const insertInto = 
-`INSERT INTO ${table} (id_grado, id_grupo, id_jornada, id_seccion, id_anio, nombre, n_cupos) 
-VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`; 
+`INSERT INTO ${table} (nombre, n_cupos) 
+VALUES ($1, $2) RETURNING *`; 
 // 
 const selectAll = 
 `SELECT * FROM ${table}`;
@@ -19,8 +19,8 @@ const selectAulaNameWhere =
 `SELECT nombre FROM ${table} where ${pk} = $1`;
 // 
 const updateWhere = 
-`UPDATE ${table} SET id_grado = $1, id_grupo = $2, id_jornada = $3, id_seccion = $4, id_anio = $5, nombre = $6, n_cupos = $7
-WHERE ${pk} = $8 RETURNING *`;
+`UPDATE ${table} SET nombre = $1, n_cupos = $2
+WHERE ${pk} = $3 RETURNING *`;
 // 
 const deleteWhere = 
 `DELETE FROM ${table} WHERE ${pk} = $1 RETURNING *`;

@@ -12,9 +12,9 @@ const {
 
 const create = async (req, res, next) => {
     try {
-        const { idGrado, idGrupo, idJornada, idSeccion, idAnio, nombre, nCupos } = req.body;
+        const { nombre, nCupos } = req.body;
         const result = await db.query(insertInto, 
-            [idGrado, idGrupo, idJornada, idSeccion, idAnio, nombre, nCupos]);
+            [ nombre, nCupos ]);
         res.json(result.rows[0]);
     } catch (error) {
         next(error);
@@ -64,9 +64,9 @@ const readNameOne = async (req, res, next) => {
 const updateOne = async (req, res, next) => {
     try {
         const { idAula } = req.params;
-        const { idGrado, idGrupo, idJornada, idSeccion, idAnio, nombre, nCupos } = req.body;
+        const { nombre, nCupos } = req.body;
         const result = await db.query(updateWhere, 
-            [ idGrado, idGrupo, idJornada, idSeccion, idAnio, nombre, nCupos, idAula ]);
+            [ nombre, nCupos, idAula ]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 message: msgNotFound('actualizar', 'id_aula', idAula),
