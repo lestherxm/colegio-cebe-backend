@@ -75,7 +75,7 @@ const readOne = async (req, res, next) => {
 const updateOne = async (req, res, next) => {
     try {
         const { idAlumno } = req.params;
-        const { cui, correo, nombres, apellidos, genero, direccion, esta_activo } = req.body;
+        const { cui, correo, nombres, apellidos, genero, direccion, esta_activo, id_aula } = req.body;
         const nombreCompleto = `${nombres} ${apellidos}`;
         const result = await db.query(uptadeWhere, [
             cui,
