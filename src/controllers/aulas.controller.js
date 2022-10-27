@@ -12,9 +12,9 @@ const {
 
 const create = async (req, res, next) => {
     try {
-        const { nombre, nCupos } = req.body;
+        const { nombre, n_cupos } = req.body;
         const result = await db.query(insertInto, 
-            [ nombre, nCupos ]);
+            [ nombre, n_cupos ]);
         res.json(result.rows[0]);
     } catch (error) {
         next(error);
@@ -64,9 +64,9 @@ const readNameOne = async (req, res, next) => {
 const updateOne = async (req, res, next) => {
     try {
         const { idAula } = req.params;
-        const { nombre, nCupos } = req.body;
+        const { nombre, n_cupos } = req.body;
         const result = await db.query(updateWhere, 
-            [ nombre, nCupos, idAula ]);
+            [ nombre, n_cupos, idAula ]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 message: msgNotFound('actualizar', 'id_aula', idAula),

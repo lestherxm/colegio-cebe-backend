@@ -1,3 +1,24 @@
+--* INICIO - CURSOS
+
+DROP TABLE IF EXISTS cursos;
+CREATE TABLE cursos(
+    id_curso SERIAL PRIMARY KEY,
+    nombre VARCHAR(250) UNIQUE NOT NULL,
+    descripcion TEXT UNIQUE NOT NULL
+);
+INSERT INTO cursos(nombre, descripcion) VALUES
+('MATEMÁTICA I', 'DESCRIPCIÓN MATEMÁTICA I'),
+('FÍSICA I', 'DESCRIPCIÓN FÍSICA I'),
+('QUÍMICA I', 'DESCRIPCIÓN QUÍMICA I'),
+('MATEMÁTICA II', 'DESCRIPCIÓN MATEMÁTICA II'),
+('FÍSICA II', 'DESCRIPCIÓN FÍSICA II'),
+('QUÍMICA II', 'DESCRIPCIÓN QUÍMICA II'),
+('MATEMÁTICA III', 'DESCRIPCIÓN MATEMÁTICA III'),
+('FÍSICA III', 'DESCRIPCIÓN FÍSICA III'),
+('QUÍMICA III', 'DESCRIPCIÓN QUÍMICA III');
+
+--* FIN - CURSOS
+
 --* INICIO - ADMINISTRADORES
 
 DROP TABLE IF EXISTS administradores;
@@ -40,6 +61,92 @@ INSERT INTO docentes(cui, correo, nombres, apellidos, nombre_completo, genero, d
 ('6123456789123','jramirez@cebe.com', 'Jorge','Ramirez', 'Jorge Ramirez', 'M', 'P.O. Box 733, 218 Tincidunt Street');
 
 --* FIN - DOCENTES
+
+--* INICIO - AULAS
+
+DROP TABLE IF EXISTS aulas;
+CREATE TABLE aulas(
+    id_aula SERIAL PRIMARY KEY,
+    nombre VARCHAR(250) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
+    n_cupos SMALLINT NOT NULL DEFAULT 0,
+    n_inscritos SMALLINT NOT NULL DEFAULT 0,
+    CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
+);
+INSERT INTO aulas(nombre, n_cupos) VALUES
+('PRIMERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 32),
+('SEGUNDO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 28),
+('TERCERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 23),
+('PRIMERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 32),
+('SEGUNDO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 28),
+('TERCERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 23);
+
+--* FIN - AULAS
+
+--* INICIO - ALUMNOS
+
+DROP TABLE IF EXISTS alumnos;
+CREATE TABLE alumnos(
+    id_alumno SERIAL PRIMARY KEY,
+    cui CHAR(13) UNIQUE NOT NULL,
+    correo VARCHAR(250) UNIQUE NOT NULL,
+    nombres VARCHAR(250) NOT NULL,
+    apellidos VARCHAR(250) NOT NULL,
+    nombre_completo VARCHAR(250) NOT NULL, -- util para reportes
+    genero CHAR(1) NOT NULL DEFAULT 'M', 
+    direccion VARCHAR(250) NOT NULL,
+    esta_activo BOOLEAN DEFAULT TRUE NOT NULL,
+    id_aula INT NOT NULL,
+    CONSTRAINT fk_aula
+    FOREIGN KEY(id_aula)
+    REFERENCES aulas(id_aula) --el tipo de contacto debe existir si o si, caso contrario da error.
+);
+
+-- https://www.youtube.com/watch?v=bxZM2fqo0wk
+-- https://www.digitalocean.com/community/tutorials/sql-select-statement-with-count
+-- https://docs.oracle.com/cd/E17781_01/appdev.112/e18147/tdddg_triggers.htm#TDDDG99934
+--? Es necesario un triger que aumente @n_inscritos cada vez que un alumno se asigne un aula
+--? El triger necesita ejecutar una funcion asi que, eso se hará
+--* FUNCION A UTILIZAR AL MOMENTO DE INSERTAR UN NUEVO ALUMNO Y ACTUALIZAR LA CANTIDAD DE INSCRITOS EN SU AULA ASIGNADA
+CREATE OR REPLACE FUNCTION fn_inscritos_aula_insert() RETURNS TRIGGER
+AS
+$$
+BEGIN
+    UPDATE aulas SET n_inscritos= (SELECT COUNT(id_aula) FROM alumnos WHERE id_aula = new.id_aula) WHERE id_aula = new.id_aula;
+    RETURN NEW;
+END
+$$
+Language plpgsql;
+--* EL TRIGER EJECUTA ESA FUNCIONA DESPUES DE HABER INSERTADO UN ALUMNO
+CREATE TRIGGER TR_INSERT AFTER INSERT ON alumnos
+FOR EACH ROW
+EXECUTE PROCEDURE fn_inscritos_aula_insert();
+
+--* FUNCION A UTILIZAR AL MOMENTO DE ACTUALIZAR LOS DATOS DE UN ALUMNO Y ACTUALIZAR LA CANTIDAD DE INSCRITOS EN CASO DE QUE SU AULA HAYA CAMBIADO Y AUMENTAR EL CONTADOR DE SU NUEVA AULA
+CREATE OR REPLACE FUNCTION fn_inscritos_aula_update() RETURNS TRIGGER
+AS
+$$
+BEGIN
+    UPDATE aulas SET n_inscritos= (SELECT COUNT(id_aula) FROM alumnos WHERE id_aula = old.id_aula) WHERE id_aula = old.id_aula; 
+    UPDATE aulas SET n_inscritos= (SELECT COUNT(id_aula) FROM alumnos WHERE id_aula = new.id_aula) WHERE id_aula = new.id_aula;
+    RETURN NEW;
+END
+$$
+Language plpgsql;
+--* EL TRIGER EJECUTA ESA FUNCIONA DESPUES DE HABER INSERTADO UN ALUMNO
+CREATE TRIGGER TR_UPDATE AFTER UPDATE ON alumnos
+FOR EACH ROW
+EXECUTE PROCEDURE fn_inscritos_aula_update();
+
+--* INSERTANDO DATOS DE PRUEBA
+INSERT INTO alumnos(cui, correo, nombres, apellidos, nombre_completo, genero, direccion, id_aula) VALUES
+('1123456789123','apereira@cebe.com', 'Alejandro','Pereira', 'Alejandro Pereira', 'M', 'P.O. Box 733, 218 Tincidunt Street', 1),
+('2123456789123','aruiz@cebe.com', 'Alvaro','Ruiz', 'Alvaro Ruiz', 'M', 'P.O. Box 733, 218 Tincidunt Street', 1),
+('3123456789123','margueta@cebe.com', 'Manuel','Argueta', 'Manuel Argueta', 'F', 'P.O. Box 733, 218 Tincidunt Street', 2),
+('4123456789123','mhernandez@cebe.com', 'Marta','Hernandez', 'Marta Hernadez', 'M', 'P.O. Box 733, 218 Tincidunt Street', 2),
+('5123456789123','jcastillo@cebe.com', 'Juan','Castillo', 'Juan Castillo', 'M', 'P.O. Box 733, 218 Tincidunt Street', 3),
+('6123456789123','apaz@cebe.com', 'Alejandra','Paz', 'Alejandra Paz', 'M', 'P.O. Box 733, 218 Tincidunt Street', 3);
+
+--* FIN - ALUMNOS
 
 --* INICIO  - ROLES
 
@@ -146,37 +253,3 @@ CREATE TABLE anios(
 INSERT INTO anios(anio) VALUES('2022'), ('2021'), ('2020'), ('2019'), ('2018');
 
 --* FIN - AÑOS
-
---* INICIO - AULAS
-
-DROP TABLE IF EXISTS aulas;
-CREATE TABLE aulas(
-    id_aula SERIAL PRIMARY KEY,
-    nombre VARCHAR(250) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
-    n_cupos SMALLINT NOT NULL DEFAULT 0,
-    n_inscritos SMALLINT NOT NULL DEFAULT 0,
-    CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
-);
-INSERT INTO aulas(nombre, n_cupos) VALUES
-('PRIMERO BÁSICO - JORNADA VESPERTINA - SECCIÓN A - 2022', 32),
-('SEGUNDO BÁSICO - JORNADA VESPERTINA - SECCIÓN A - 2022', 28),
-('TERCERO BÁSICO - JORNADA VESPERTINA - SECCIÓN A - 2022', 23);
-
---* FIN - AULAS
-
-DROP TABLE IF EXISTS cursos;
-CREATE TABLE cursos(
-    id_curso SERIAL PRIMARY KEY,
-    nombre VARCHAR(250) UNIQUE NOT NULL,
-    descripcion TEXT UNIQUE NOT NULL
-);
-INSERT INTO cursos(nombre, descripcion) VALUES
-('MATEMÁTICA I', 'DESCRIPCIÓN MATEMÁTICA I'),
-('FÍSICA I', 'DESCRIPCIÓN FÍSICA I'),
-('QUÍMICA I', 'DESCRIPCIÓN QUÍMICA I'),
-('MATEMÁTICA II', 'DESCRIPCIÓN MATEMÁTICA II'),
-('FÍSICA II', 'DESCRIPCIÓN FÍSICA II'),
-('QUÍMICA II', 'DESCRIPCIÓN QUÍMICA II'),
-('MATEMÁTICA III', 'DESCRIPCIÓN MATEMÁTICA III'),
-('FÍSICA III', 'DESCRIPCIÓN FÍSICA III'),
-('QUÍMICA III', 'DESCRIPCIÓN QUÍMICA III');
