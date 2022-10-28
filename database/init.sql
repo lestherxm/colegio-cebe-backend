@@ -19,6 +19,56 @@ INSERT INTO cursos(nombre, descripcion) VALUES
 
 --* FIN - CURSOS
 
+--* INICIO - AULAS
+
+DROP TABLE IF EXISTS aulas;
+CREATE TABLE aulas(
+    id_aula SERIAL PRIMARY KEY,
+    nombre VARCHAR(250) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
+    n_cupos SMALLINT NOT NULL DEFAULT 0,
+    n_inscritos SMALLINT NOT NULL DEFAULT 0,
+    CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
+);
+INSERT INTO aulas(nombre, n_cupos) VALUES
+('PRIMERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 32),
+('SEGUNDO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 28),
+('TERCERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 23),
+('PRIMERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 32),
+('SEGUNDO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 28),
+('TERCERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 23);
+
+--* FIN - AULAS
+
+--* INICIO CURSOS DE CADA AULA
+DROP TABLE IF EXISTS cursos_aula;
+CREATE TABLE cursos_aula(
+    id_aula INT NOT NULL,
+    id_curso INT NOT NULL,
+
+    PRIMARY KEY(id_aula, id_curso),
+
+    CONSTRAINT fk_aula
+    FOREIGN KEY(id_aula)
+    REFERENCES aulas(id_aula),
+
+    CONSTRAINT fk_curso
+    FOREIGN KEY(id_curso)
+    REFERENCES cursos(id_curso) 
+);
+
+INSERT INTO cursos_aula(id_aula, id_curso) VALUES
+(1,1),
+(1,2),
+(1,3),
+(2,4),
+(2,5),
+(2,6),
+(3,7),
+(3,8),
+(3,9);
+
+--* FINAL CURSOS DE CADA AULA
+
 --* INICIO - ADMINISTRADORES
 
 DROP TABLE IF EXISTS administradores;
@@ -62,26 +112,6 @@ INSERT INTO docentes(cui, correo, nombres, apellidos, nombre_completo, genero, d
 
 --* FIN - DOCENTES
 
---* INICIO - AULAS
-
-DROP TABLE IF EXISTS aulas;
-CREATE TABLE aulas(
-    id_aula SERIAL PRIMARY KEY,
-    nombre VARCHAR(250) UNIQUE NOT NULL, -- concatenacion mediante combobox de grados, grupos, jornadas, seccions, anios.
-    n_cupos SMALLINT NOT NULL DEFAULT 0,
-    n_inscritos SMALLINT NOT NULL DEFAULT 0,
-    CONSTRAINT chk_capacidad CHECK (n_inscritos <= n_cupos) -- de modo que no se puedan inscribir mas alumnos de los que soporta el aula.
-);
-INSERT INTO aulas(nombre, n_cupos) VALUES
-('PRIMERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 32),
-('SEGUNDO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 28),
-('TERCERO BÁSICO - JORNADA MATUTINA - SECCIÓN A - 2022', 23),
-('PRIMERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 32),
-('SEGUNDO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 28),
-('TERCERO BÁSICO - JORNADA VESPERTINA - SECCIÓN B - 2022', 23);
-
---* FIN - AULAS
-
 --* INICIO - ALUMNOS
 
 DROP TABLE IF EXISTS alumnos;
@@ -98,7 +128,7 @@ CREATE TABLE alumnos(
     id_aula INT NOT NULL,
     CONSTRAINT fk_aula
     FOREIGN KEY(id_aula)
-    REFERENCES aulas(id_aula) --el tipo de contacto debe existir si o si, caso contrario da error.
+    REFERENCES aulas(id_aula) 
 );
 
 -- https://www.youtube.com/watch?v=bxZM2fqo0wk
@@ -163,6 +193,68 @@ INSERT INTO alumnos(cui, correo, nombres, apellidos, nombre_completo, genero, di
 ('6123456789123','apaz@cebe.com', 'Alejandra','Paz', 'Alejandra Paz', 'M', 'P.O. Box 733, 218 Tincidunt Street', 3);
 
 --* FIN - ALUMNOS
+
+--* INICIO - HORARIOS
+
+DROP TABLE IF EXISTS horas;
+CREATE TABLE horas(
+    id_horario SERIAL PRIMARY KEY,
+    inicio_fin CHAR(13) UNIQUE NOT NULL -- '07:00 - 07:35' = 13
+);
+
+INSERT INTO horas(inicio_fin) VALUES
+('07:00 - 07:35'), 
+('07:40 - 08:15'),
+('08:20 - 08:55'),
+('09:00 - 09:35'), 
+('09:40 - 10:15'), 
+('10:20 - 10:55'), 
+('11:00 - 11:35'),
+('11:40 - 12:15'),
+('12:20 - 12:55'),
+('13:00 - 13:35'),
+('13:40 - 14:15'),
+('14:20 - 14:55'),
+('15:00 - 15:35'),
+('15:40 - 16:15'),
+('16:20 - 16:55'),
+('17:00 - 17:35'),
+('17:40 - 18:15');
+
+--* FINAL - HORARIOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --* INICIO  - ROLES
 

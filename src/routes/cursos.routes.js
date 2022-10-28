@@ -4,7 +4,7 @@ const cursos = require("../controllers/cursos.controller");
 const router = require("express").Router();
 // End Point
 const ep = '/cursos';
-const pk = 'idCurso'
+const pk = 'idCurso';
 //C
 router.post(`${ep}`, cursos.create);
 //R
